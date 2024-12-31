@@ -7,7 +7,7 @@ import argparse
 import numpy as np
 from matplotlib import pyplot as plt
 
-from dusk.grid import RasterData
+from brisbane_sunset.grid import RasterData
 
 parser = argparse.ArgumentParser(
                     prog='subset_tif',

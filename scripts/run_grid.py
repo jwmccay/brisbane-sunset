@@ -4,11 +4,11 @@ Run over a grid.
 
 import numpy as np
 
-from dusk.containers import Origin, Date
-from dusk.grid import setup_transformer
-from dusk.dusk import (standard_preparation,
-                       interp_wrapper,
-                       time_blocked)
+from brisbane_sunset.containers import Origin, Date
+from brisbane_sunset.grid import setup_transformer
+from brisbane_sunset.dusk import (standard_preparation,
+                                  interp_wrapper,
+                                  time_blocked)
 
 from matplotlib import pyplot as plt
 

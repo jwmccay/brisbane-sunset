@@ -4,15 +4,16 @@ Main functions for finding sunsets
 
 import numpy as np
 
-from dusk.solar import (input_to_datetime,
-                        sun_alt_az_suncalc,
-                        phi_critical,
-                        get_sunset_time)
-from dusk.geography import coordinate_range_from_az, xy_range_from_az
-from dusk.plots import make_plots
-from dusk.grid import (RasterData,
-                       setup_interpolator,
-                       setup_transformer)
+from brisbane_sunset.solar import (input_to_datetime,
+                                   sun_alt_az_suncalc,
+                                   phi_critical,
+                                   get_sunset_time)
+from brisbane_sunset.geography import (coordinate_range_from_az,
+                                       xy_range_from_az)
+from brisbane_sunset.plots import make_plots
+from brisbane_sunset.grid import (RasterData,
+                                  setup_interpolator,
+                                  setup_transformer)
 
 
 def standard_preparation(raster_fname,

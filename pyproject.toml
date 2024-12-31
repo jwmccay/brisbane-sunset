@@ -3,8 +3,8 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dusk"
-description = "Sunset times adjacent to San Bruno Mountain"
+name = "brisbane_sunset"
+description = "Sunset times in Brisbane, CA"
 requires-python = ">=3.12"
 version = "0.0.1"
 dynamic = ["dependencies", "optional-dependencies"]
