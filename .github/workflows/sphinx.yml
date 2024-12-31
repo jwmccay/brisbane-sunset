@@ -32,12 +32,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      # - name: Install Sphinx
-      #   run: pip install -e .[dev]
       - name: Install Sphinx
-        run: pip install -U sphinx
-      - name: Install numpydoc
-        run: pip install numpydoc
+        # install full package to allow for autodoc
+        run: pip install -e .[dev]
       - name: Build Sphinx site
         run: sphinx-build -M html docs/ docs/_build/
       - name: Fix permissions
