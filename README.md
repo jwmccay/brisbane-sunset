@@ -16,8 +16,7 @@ pip install -e .[dev]
 
 To build documentation:
 ```shell
-cd docs
-sphinx-build . _build/
+sphinx-build -M html docs/ docs/_build/
 ```
 
 ## Usage
