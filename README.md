@@ -4,8 +4,20 @@
 
 ## Install
 
+Normal usage:
+```shell
+pip install .
+```
+
+Development:
 ```shell
 pip install -e .[dev]
+```
+
+To build documentation:
+```shell
+cd docs
+sphinx-build . _build/
 ```
 
 ## Usage
