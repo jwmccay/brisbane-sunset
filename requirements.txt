@@ -3,6 +3,6 @@ scipy
 matplotlib
 pytz
 geopy
-rasterio
+rasterio<1.4
 pyproj
 suncalc
