@@ -1,6 +1,6 @@
 # San Bruno Sunset
 
-[![Main test and lint](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml)
+[![Test and lint](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml) [![Sphinx deployment](https://github.com/jwmccay/brisbane-sunset/actions/workflows/sphinx.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/sphinx.yml)
 
 ## Install
 
@@ -9,17 +9,9 @@ Normal usage:
 pip install .
 ```
 
-Development:
-```shell
-pip install -e .[dev]
-```
-
-To build documentation:
-```shell
-sphinx-build -M html docs/ docs/_build/
-```
-
 ## Usage
+
+Note: theory and API documentation can be found at https://www.smilacina.com/brisbane-sunset/.
 
 ### Step 1: Acquire an SRTM raster
 
@@ -54,3 +46,15 @@ python reproject_tif.py \
 ### Step 3: Compute sunset times
 
 To write later...
+
+## Development
+
+Development installation:
+```shell
+pip install -e .[dev]
+```
+
+To build documentation:
+```shell
+sphinx-build -M html docs/ docs/_build/
+```
