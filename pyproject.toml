@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dusk"
+description = "Sunset times adjacent to San Bruno Mountain"
+requires-python = ">=3.12"
+version = "0.0.1"
+dynamic = ["dependencies", "optional-dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
+
+# [project.scripts]
+# somescript = "san_bruno_sunset:reproject"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]

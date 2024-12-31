@@ -1,0 +1,23 @@
+# Python
+*.pyc
+__pycache__
+
+# pip
+build/
+*.egg-info
+
+# MacOS
+.DS_Store
+
+# Data
+data/
+*.bsp
+*.png
+scripts/*.csv
+scripts/*.npy
+scripts/*.zip
+
+# Profile
+*.pdf
+*.dot
+*.profile
