@@ -43,7 +43,34 @@ def time_blocked(origin, max_distance, date, interp, rd,
                  interp_mode="RegularGrid",
                  coord_mode="latlon",
                  num_points=100):
-    """Find time when a point can no longer see the sun
+    """Find time when a point can no longer see the sun.
+
+    Parameters
+    ----------
+    origin : containers.Origin
+        Location of observer
+    max_distance : float
+        Distance to check for interpolation (padded by 50%)
+    date : containers.Date
+        Day for calculation
+    rd : grid.RasterData
+        Raster for use in plotting
+    draw_plots : bool
+        Whether to draw plots
+    interp_mode : str
+        Interpolation algorithmm, either `RegularGrid` or `LinearND`.
+        Removal of `RegularGrid` is planned.
+    coord_mode : str
+        Mode for calculating coordinates. Either `xy` or `latlon`. Note
+        that `xy` is faster.
+    num_points : int
+        Number of points to use for interpolation. More points is more
+        accurate but slower.
+
+    Returns
+    -------
+    dt : datetime
+        Sunset time in local timezone
     """
 
     distance_list = np.linspace(1.0, max_distance * 1.5,

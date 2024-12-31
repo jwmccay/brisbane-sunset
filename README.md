@@ -1,9 +1,23 @@
 # San Bruno Sunset
 
+[![Main test and lint](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml)
+
 ## Install
 
+Normal usage:
+```shell
+pip install .
+```
+
+Development:
 ```shell
 pip install -e .[dev]
+```
+
+To build documentation:
+```shell
+cd docs
+sphinx-build . _build/
 ```
 
 ## Usage
