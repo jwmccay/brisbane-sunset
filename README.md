@@ -11,7 +11,7 @@ pip install .
 
 ## Usage
 
-Note: theory and API documentation can be found at https://www.smilacina.com/brisbane-sunset/.
+Note: work-in-progress theory and API documentation can be found at https://www.smilacina.com/brisbane-sunset/.
 
 ### Step 1: Acquire an SRTM raster
 
