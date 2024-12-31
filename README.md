@@ -1,5 +1,7 @@
 # San Bruno Sunset
 
+[![Main test and lint](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml)
+
 ## Install
 
 ```shell
