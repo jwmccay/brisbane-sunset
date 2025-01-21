@@ -13,8 +13,9 @@ from brisbane_sunset.dusk import (standard_preparation,
 
 if __name__ == "__main__":
 
-    lon_origin = -122.402513
-    lat_origin = 37.686620
+    lon_origin = -122.4150331485603
+    lat_origin = 37.692434406915844
+
     distance = 1800.0
 
     draw_plots = True
@@ -53,8 +54,8 @@ if __name__ == "__main__":
 
     dt_list = []
 
-    base = datetime.datetime(2024, 1, 1, 1, 1)
-    day_list = [base + datetime.timedelta(days=x) for x in range(366)]
+    base = datetime.datetime(2025, 1, 1, 1, 1)
+    day_list = [base + datetime.timedelta(days=x) for x in range(365)]
     hour_list = []
 
     i = 0
@@ -64,7 +65,8 @@ if __name__ == "__main__":
         dt_day = time_blocked(origin, distance, date, interp, rd,
                               draw_plots=False,
                               interp_mode=interp_mode,
-                              coord_mode=coord_mode)
+                              coord_mode=coord_mode,
+                              num_points=1000)
 
         dt_list.append(dt_day)
 
