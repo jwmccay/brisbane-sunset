@@ -10,15 +10,14 @@ from brisbane_sunset.dusk import (standard_preparation,
 
 if __name__ == "__main__":
 
-    # between 6:35 and 6:37 for March 17
-
-    year = 2024
-    month = 11
-    day = 10
-
-    lon_origin = -122.402513
-    lat_origin = 37.686620
+    year = 2025
+    month = 1
+    day = 18
     distance = 1800.0
+
+    # Mission Blue
+    lon_origin = -122.4150331485603
+    lat_origin = 37.692434406915844
 
     draw_plots = True
 
