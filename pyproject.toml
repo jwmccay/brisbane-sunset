@@ -13,8 +13,8 @@ dynamic = ["dependencies", "optional-dependencies"]
 dependencies = {file = ["requirements.txt"]}
 optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
 
-# [project.scripts]
-# somescript = "san_bruno_sunset:reproject"
+[project.scripts]
+sunset-view-tif = "brisbane_sunset:view_tif"
 
 [tool.pytest.ini_options]
 addopts = [
