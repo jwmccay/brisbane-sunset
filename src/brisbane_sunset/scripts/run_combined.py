@@ -47,8 +47,7 @@ def run_combined():
     parser.add_argument("-r", "--raster")
     parser.add_argument("-d", "--date")
     parser.add_argument("-oc", "--origin_coordinate")
-    parser.add_argument("-cm", "--coord_mode", default="xy")
-    parser.add_argument("-e", "--epsg", default=7131, type=int)
+    parser.add_argument("-cm", "--coord_mode")
     parser.add_argument("-dp", "--draw_plots", action='store_true')
     parser.add_argument("-fd", "--figure_directory", default=None)
 
@@ -70,6 +69,7 @@ def run_combined():
 
     # Options that have not migrated to argparse yet
     distance = 1800.0
+    num_points = 10000
     # interp_mode = "RegularGrid"
     interp_mode = "LinearND"
 
@@ -94,7 +94,7 @@ def run_combined():
                       draw_plots=draw_plots,
                       interp_mode=interp_mode,
                       coord_mode=coord_mode,
-                      num_points=10000,
+                      num_points=num_points,
                       fig_dir=figure_directory)
 
     hour = dt.hour - 12
