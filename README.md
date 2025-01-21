@@ -19,25 +19,25 @@ There are a few different ways to do this, but the easiest is via [EarthExplorer
 
 ### Step 2: Reproject the raster
 
-The SRTM tile is 1-arcsecond square which is much larger than needed for shading calculations. The large tile size makes loading the raster and any interpolation quite slow. `subset_tif.py` is provided to subset the raster. The bounds required by `subset_tif.py` can be found by viewing the initial file with `view_tif.py` with default settings. Typical usage for this step is:
+The SRTM tile is 1-arcsecond square which is much larger than needed for shading calculations. The large tile size makes loading the raster and any interpolation quite slow. `sunset-subset-tif` is provided to subset the raster. The bounds required by `sunset-subset-tif` can be found by viewing the initial file with `sunset-view-tif` with default settings. Typical usage for this step is:
 
 ```shell
 
 # View raster and find bounds using the magnifying glass tool in
 # the matplotlib viewer.
-python view_tif.py -c Spectral_r data/n37_w123_1arc_v3.tif
+sunset-view-tif -c Spectral_r data/n37_w123_1arc_v3.tif
 
 # Subset it (more details about what the bounds are in the script)
-python subset_tif.py \
+sunset-subset-tif \
     -i "data/n37_w123_1arc_v3.tif" \
     -o "data/n37_w123_subset.tif" \
     -b 1900 900 400 400
 ```
 
-SRTM data comes in the EPSG 4326 CRS, which is a latitude/longitude dataset. Downstream tools support using this coordinate system, but they are faster if given an x/y coordinate system. The `reproject_tif.py` utility is provided to make that transformation. Typical usage is:
+SRTM data comes in the EPSG 4326 CRS, which is a latitude/longitude dataset. Downstream tools support using this coordinate system, but they are faster if given an x/y coordinate system. The `sunset-reproject-tif` utility is provided to make that transformation. Typical usage is:
 
 ```shell
-python reproject_tif.py \
+sunset-reproject-tif \
     -i data/n37_w123_subset.tif \
     -o data/n37_w123_subset_reproject.tif \
     -e 7131
