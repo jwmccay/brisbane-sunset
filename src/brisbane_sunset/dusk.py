@@ -42,7 +42,8 @@ def time_blocked(origin, max_distance, date, interp, rd,
                  draw_plots=False,
                  interp_mode="RegularGrid",
                  coord_mode="latlon",
-                 num_points=100):
+                 num_points=100,
+                 fig_dir=None):
     """Find time when a point can no longer see the sun.
 
     Parameters
@@ -66,6 +67,9 @@ def time_blocked(origin, max_distance, date, interp, rd,
     num_points : int
         Number of points to use for interpolation. More points is more
         accurate but slower.
+    fig_dir : Path or None
+        Directory to write figures to. Must exist before running script.
+        If None, figures are shown rather than written.
 
     Returns
     -------
@@ -135,6 +139,6 @@ def time_blocked(origin, max_distance, date, interp, rd,
 
         make_plots(rd, lon_list, lat_list,
                    distance_list, interp_range, phi_range, alt,
-                   fig_dir="figs")
+                   fig_dir=fig_dir)
 
     return dt
