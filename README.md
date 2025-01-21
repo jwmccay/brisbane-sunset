@@ -45,7 +45,26 @@ sunset-reproject-tif \
 
 ### Step 3: Compute sunset times
 
-To write later...
+The `sunset-run` utility takes a date, origin (or viewer) coordinate, and raster and then computes an approximate time for a local sunset accounting for terrain shading. Note that you need specify usage of either an x/y or a lat/lon coordinate for interpolation (`-cm "xy"` or `-cm "latlon`). The input raster must match the coordinate mode (i.e., you will probably not be able to the x/y mode if you have not run `sunset-reproject-tif`) and x/y coordinates are assumed to be in meters.
+
+```shell
+sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
+    -r "data/n37_w123_subset_reproject.tif" \
+    -cm "xy"
+```
+
+Some additional arguments allow for the output of plots useful for debugging (`-dp` to make plots, `-fd` to save them to a directory):
+
+```shell
+sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
+    -r "data/n37_w123_subset_reproject.tif" \
+    -cm "xy" \
+    -dp -fd "figs"
+```
+
+#### In-development scripts
+
+Two additional scripts live in `scripts_dev`. Both are functional but they are even less user friendly. `run_combined_date_range.py` runs the calculation for every day in a given year at the same origin. `run_grid.py` runs the calculation for a single day on a grid of origins and provides some contour plots.
 
 ## Development
 
