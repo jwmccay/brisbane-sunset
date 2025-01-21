@@ -26,19 +26,17 @@ if __name__ == "__main__":
     # coord_mode = "latlon"
     # raster_fname = "data/n37_w123_subset.tif"
     # epsg_latlon = None
-    # epsg_xy = None
 
     raster_fname = "data/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
-    epsg_xy = 7131
 
     print("prep")
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
         interp_mode,
-        epsg_latlon, epsg_xy)
+        epsg_latlon)
 
     if coord_mode == "xy":
         x_origin, y_origin = transformer.transform(

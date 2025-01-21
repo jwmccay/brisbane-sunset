@@ -63,10 +63,8 @@ def run_combined():
 
     if coord_mode == "xy":
         epsg_latlon = 4326
-        epsg_xy = args.epsg
     elif coord_mode == "latlon":
         epsg_latlon = None
-        epsg_xy = None
     else:
         assert False, f"coord_mode {coord_mode} is not a valid coordinate mode"
 
@@ -78,7 +76,7 @@ def run_combined():
     rd, interp, transformer = standard_preparation(
         raster_fname,
         interp_mode,
-        epsg_latlon, epsg_xy)
+        epsg_latlon)
 
     if coord_mode == "xy":
         x_origin, y_origin = transformer.transform(
@@ -93,7 +91,7 @@ def run_combined():
     origin.init_xy(x_origin, y_origin)
 
     dt = time_blocked(origin, distance, date, interp, rd,
-                      draw_plots=args.draw_plots,
+                      draw_plots=draw_plots,
                       interp_mode=interp_mode,
                       coord_mode=coord_mode,
                       num_points=10000,

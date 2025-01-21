@@ -18,13 +18,13 @@ from brisbane_sunset.grid import (RasterData,
 
 def standard_preparation(raster_fname,
                          interp_mode,
-                         epsg_latlon=None, epsg_xy=None):
+                         epsg_latlon=None):
 
     rd = RasterData(raster_fname)
     interp = setup_interpolator(rd, interp_mode=interp_mode)
 
-    if epsg_latlon is not None and epsg_xy is not None:
-        transformer = setup_transformer(epsg_latlon, epsg_xy)
+    if epsg_latlon is not None:
+        transformer = setup_transformer(epsg_latlon, rd.crs.to_epsg())
     else:
         transformer = None
 
