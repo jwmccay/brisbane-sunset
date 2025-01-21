@@ -14,17 +14,16 @@ from rasterio.warp import (calculate_default_transform,
                            reproject,
                            Resampling)
 
-parser = argparse.ArgumentParser(
-                    prog='subset_tif',
-                    description='Reproject an SRTM tif')
 
+def reproject_tif():
 
-parser.add_argument('-i', '--input')
-parser.add_argument('-o', '--output')
-parser.add_argument('-e', '--epsg', type=int)
+    parser = argparse.ArgumentParser(
+                        prog='subset_tif',
+                        description='Reproject an SRTM tif')
 
-
-if __name__ == "__main__":
+    parser.add_argument('-i', '--input')
+    parser.add_argument('-o', '--output')
+    parser.add_argument('-e', '--epsg', type=int)
 
     args = parser.parse_args()
 
@@ -40,7 +39,7 @@ if __name__ == "__main__":
             'width': width,
             'height': height
         })
-        values_src = src.read()
+        # values_src = src.read()
 
         with rasterio.open(args.output, 'w', **kwargs) as dst:
             for i in range(1, src.count + 1):

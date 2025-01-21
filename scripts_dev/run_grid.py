@@ -29,7 +29,6 @@ if __name__ == "__main__":
     raster_fname = "data/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
-    epsg_xy = 7131
 
     sample_bounds_low = (37.67386, -122.43312)
     sample_bounds_high = (37.69962, -122.37918)
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     rd, interp, transformer = standard_preparation(
         raster_fname,
         interp_mode,
-        epsg_latlon, epsg_xy)
+        epsg_latlon)
 
     plt.pcolormesh(rd.lons_grid, rd.lats_grid, rd.values_grid)
     plt.show()
@@ -74,7 +73,7 @@ if __name__ == "__main__":
     plt.colorbar(CS)
     plt.show()
 
-    transformer2 = setup_transformer(epsg_xy, epsg_latlon)
+    transformer2 = setup_transformer(rd.crs.to_epsg(), epsg_latlon)
 
     n = 0
     nt = vals.shape[0] * vals.shape[1]
