@@ -57,9 +57,10 @@ if __name__ == "__main__":
     dt = time_blocked(origin, distance, date, interp, rd,
                       draw_plots=draw_plots,
                       interp_mode=interp_mode,
-                      coord_mode=coord_mode)
+                      coord_mode=coord_mode,
+                      num_points=10000)
 
-    print(f"Sunset at {dt.hour - 12}:{dt.minute} on {dt.month}/{dt.day}")
+    hour = dt.hour - 12
+    minute = str(dt.minute).rjust(2, "0")
 
-    dt_list = []
-    minutes = []
+    print(f"Sunset at {hour}:{minute} on {dt.month}/{dt.day}/{dt.year}")
