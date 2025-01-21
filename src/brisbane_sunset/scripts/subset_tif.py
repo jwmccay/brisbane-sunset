@@ -19,19 +19,16 @@ import argparse
 import rasterio
 from rasterio.windows import Window
 
-parser = argparse.ArgumentParser(
-                    prog='subset_tif',
-                    description='Create a subset of a SRTM tif')
 
+def subset_tif():
 
-# parser.add_argument('filename')           # positional argument
-parser.add_argument('-i', '--input')      # option that takes a value
-parser.add_argument('-o', '--output')      # option that takes a value
-parser.add_argument('-b', '--bounds', nargs="+", type=int)
-# parser.add_argument('-v', '--verbose',
-#                     action='store_true')  # on/off flag
+    parser = argparse.ArgumentParser(
+                        prog='subset_tif',
+                        description='Create a subset of a SRTM tif')
 
-if __name__ == "__main__":
+    parser.add_argument('-i', '--input')      # option that takes a value
+    parser.add_argument('-o', '--output')      # option that takes a value
+    parser.add_argument('-b', '--bounds', nargs="+", type=int)
 
     args = parser.parse_args()
 
