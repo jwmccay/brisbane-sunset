@@ -38,7 +38,7 @@ def parse_coordinate(coord_string: str):
     return coord_list
 
 
-if __name__ == "__main__":
+def run_combined():
 
     parser = argparse.ArgumentParser(
                         prog='sunset-run-combined',
