@@ -9,20 +9,19 @@ from matplotlib import pyplot as plt
 
 from brisbane_sunset.grid import RasterData
 
-parser = argparse.ArgumentParser(
-                    prog='subset_tif',
-                    description='Quickly plot an SRTM tif')
 
+def view_tif():
 
-parser.add_argument('fname')
-parser.add_argument('-o', '--output')
-parser.add_argument('-a', '--axis_mode')
-# shortcut to plot the latlon axis mode
-parser.add_argument('-l', '--latlon', action='store_true')
-parser.add_argument('-c', '--cmap', default='viridis')
+    parser = argparse.ArgumentParser(
+                        prog='subset_tif',
+                        description='Quickly plot an SRTM tif')
 
-
-if __name__ == "__main__":
+    parser.add_argument('fname')
+    parser.add_argument('-o', '--output')
+    parser.add_argument('-a', '--axis_mode')
+    # shortcut to plot the latlon axis mode
+    parser.add_argument('-l', '--latlon', action='store_true')
+    parser.add_argument('-c', '--cmap', default='viridis')
 
     args = parser.parse_args()
 
