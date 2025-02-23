@@ -2,12 +2,17 @@
 Make plots
 """
 
+import pathlib
+
 from matplotlib import pyplot as plt
 
 
 def make_plots(rd, lon_list, lat_list,
                distance_list, interp_range, phi_range, alt,
                fig_dir=None):
+
+    if fig_dir is not None:
+        pathlib.Path(fig_dir).mkdir(parents=True, exist_ok=True)
 
     plt.pcolormesh(rd.lons_grid, rd.lats_grid, rd.values_grid)
     plt.plot(lon_list, lat_list, "r-")

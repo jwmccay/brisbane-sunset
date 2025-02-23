@@ -18,13 +18,13 @@ from brisbane_sunset.grid import (RasterData,
 
 def standard_preparation(raster_fname,
                          interp_mode,
-                         epsg_latlon=None, epsg_xy=None):
+                         epsg_latlon=None):
 
     rd = RasterData(raster_fname)
     interp = setup_interpolator(rd, interp_mode=interp_mode)
 
-    if epsg_latlon is not None and epsg_xy is not None:
-        transformer = setup_transformer(epsg_latlon, epsg_xy)
+    if epsg_latlon is not None:
+        transformer = setup_transformer(epsg_latlon, rd.crs.to_epsg())
     else:
         transformer = None
 
@@ -42,7 +42,8 @@ def time_blocked(origin, max_distance, date, interp, rd,
                  draw_plots=False,
                  interp_mode="RegularGrid",
                  coord_mode="latlon",
-                 num_points=100):
+                 num_points=100,
+                 fig_dir=None):
     """Find time when a point can no longer see the sun.
 
     Parameters
@@ -66,6 +67,9 @@ def time_blocked(origin, max_distance, date, interp, rd,
     num_points : int
         Number of points to use for interpolation. More points is more
         accurate but slower.
+    fig_dir : Path or None
+        Directory to write figures to. If None, figures are shown
+        rather than written.
 
     Returns
     -------
@@ -135,6 +139,6 @@ def time_blocked(origin, max_distance, date, interp, rd,
 
         make_plots(rd, lon_list, lat_list,
                    distance_list, interp_range, phi_range, alt,
-                   fig_dir="figs")
+                   fig_dir=fig_dir)
 
     return dt

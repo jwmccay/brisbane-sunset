@@ -9,7 +9,7 @@
 project = 'Brisbane Sunset'
 copyright = '2024, James McCay'
 author = 'James McCay'
-release = '0.1'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

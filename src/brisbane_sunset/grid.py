@@ -20,6 +20,10 @@ class RasterData:
 
         with rasterio.open(self.fname) as ds:
 
+            # Store CRS to use for figuring out transforms with XY
+            # interpolation
+            self.crs: rasterio.crs.CRS = ds.crs
+
             values = ds.read()
 
             # assume one band

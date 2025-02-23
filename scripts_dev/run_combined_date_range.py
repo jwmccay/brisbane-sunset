@@ -2,6 +2,9 @@
 Combined calc
 """
 
+import datetime
+from matplotlib import pyplot as plt
+
 from brisbane_sunset.containers import Origin, Date
 from brisbane_sunset.dusk import (standard_preparation,
                                   interp_wrapper,
@@ -10,14 +13,9 @@ from brisbane_sunset.dusk import (standard_preparation,
 
 if __name__ == "__main__":
 
-    # between 6:35 and 6:37 for March 17
+    lon_origin = -122.4150331485603
+    lat_origin = 37.692434406915844
 
-    year = 2024
-    month = 11
-    day = 10
-
-    lon_origin = -122.402513
-    lat_origin = 37.686620
     distance = 1800.0
 
     draw_plots = True
@@ -28,17 +26,17 @@ if __name__ == "__main__":
     # coord_mode = "latlon"
     # raster_fname = "data/n37_w123_subset.tif"
     # epsg_latlon = None
-    # epsg_xy = None
 
     raster_fname = "data/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
-    epsg_xy = 7131
+
+    print("prep")
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
         interp_mode,
-        epsg_latlon, epsg_xy)
+        epsg_latlon)
 
     if coord_mode == "xy":
         x_origin, y_origin = transformer.transform(
@@ -52,14 +50,33 @@ if __name__ == "__main__":
                         interp, x_origin, y_origin))
     origin.init_xy(x_origin, y_origin)
 
-    date = Date(year, month, day)
-
-    dt = time_blocked(origin, distance, date, interp, rd,
-                      draw_plots=draw_plots,
-                      interp_mode=interp_mode,
-                      coord_mode=coord_mode)
-
-    print(f"Sunset at {dt.hour - 12}:{dt.minute} on {dt.month}/{dt.day}")
-
     dt_list = []
-    minutes = []
+
+    base = datetime.datetime(2025, 1, 1, 1, 1)
+    day_list = [base + datetime.timedelta(days=x) for x in range(365)]
+    hour_list = []
+
+    i = 0
+
+    for day in day_list:
+        date = Date(day.year, day.month, day.day)
+        dt_day = time_blocked(origin, distance, date, interp, rd,
+                              draw_plots=False,
+                              interp_mode=interp_mode,
+                              coord_mode=coord_mode,
+                              num_points=1000)
+
+        dt_list.append(dt_day)
+
+        hour_list.append(dt_day.hour - 12 + dt_day.minute / 60)
+
+        print(i, hour_list[-1])
+        i += 1
+
+    if draw_plots:
+        plt.plot(day_list, hour_list)
+        plt.grid()
+        plt.xlabel("Date")
+        plt.ylabel("Sunset time [hour since noon]")
+        plt.savefig("figs/date_range_dusk.png")
+        plt.close()
