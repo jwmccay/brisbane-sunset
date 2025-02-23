@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "brisbane_sunset"
 description = "Sunset times in Brisbane, CA"
 requires-python = ">=3.12"
-version = "0.1"
+version = "0.2.0"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools.dynamic]
