@@ -1,4 +1,4 @@
-# San Bruno Sunset
+# Brisbane Sunset
 
 [![Test and lint](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/python-package.yml) [![Sphinx deployment](https://github.com/jwmccay/brisbane-sunset/actions/workflows/sphinx.yml/badge.svg)](https://github.com/jwmccay/brisbane-sunset/actions/workflows/sphinx.yml)
 
