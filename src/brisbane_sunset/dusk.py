@@ -68,8 +68,8 @@ def time_blocked(origin, max_distance, date, interp, rd,
         Number of points to use for interpolation. More points is more
         accurate but slower.
     fig_dir : Path or None
-        Directory to write figures to. Must exist before running script.
-        If None, figures are shown rather than written.
+        Directory to write figures to. If None, figures are shown
+        rather than written.
 
     Returns
     -------
