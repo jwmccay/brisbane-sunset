@@ -1,5 +1,12 @@
 """
 Build a raster for testing
+
+Usage:
+
+python scripts_dev/build_raster.py
+sunset-view-tif -l -c Spectral_r synthetic.tif
+sunset-reproject-tif -i synthetic.tif -o synthetic_rprj.tif -e 7131
+sunset-view-tif -l -c Spectral_r synthetic_rprj.tif
 """
 
 
@@ -13,6 +20,8 @@ delta_lon = 1.0
 delta_lat = 1.0
 n_lat = 120
 n_lon = 90
+
+fname = "synthetic.tif"
 
 # increase left to right
 x = np.linspace(deg_lon, deg_lon - delta_lon, n_lon)
@@ -34,15 +43,17 @@ res = (x[-1] - x[0]) / n_lat
 transform = Affine.translation(
     x[0] - res / 2, y[0] - res / 2) * Affine.scale(res, res)
 
+crs = rasterio.CRS.from_epsg(4326)
+
 new_dataset = rasterio.open(
-     './new.tif',
+     fname,
      'w',
      driver='GTiff',
      height=Z.shape[0],
      width=Z.shape[1],
      count=1,
      dtype=Z.dtype,
-     crs='+proj=latlong',
+     crs=crs,
      transform=transform,
  )
 
