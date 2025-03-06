@@ -15,7 +15,7 @@ from rasterio.warp import (calculate_default_transform,
                            Resampling)
 
 
-def reproject_tif():
+def parse_args():
 
     parser = argparse.ArgumentParser(
                         prog='subset_tif',
@@ -27,9 +27,14 @@ def reproject_tif():
 
     args = parser.parse_args()
 
-    dst_crs = rasterio.CRS.from_epsg(args.epsg)
+    return args
 
-    with rasterio.open(args.input) as src:
+
+def reproject_tif_main(epsg, input_raster, output_raster):
+
+    dst_crs = rasterio.CRS.from_epsg(epsg)
+
+    with rasterio.open(input_raster) as src:
         transform, width, height = calculate_default_transform(
             src.crs, dst_crs, src.width, src.height, *src.bounds)
         kwargs = src.meta.copy()
@@ -41,7 +46,7 @@ def reproject_tif():
         })
         # values_src = src.read()
 
-        with rasterio.open(args.output, 'w', **kwargs) as dst:
+        with rasterio.open(output_raster, 'w', **kwargs) as dst:
             for i in range(1, src.count + 1):
                 reproject(
                     source=rasterio.band(src, i),
@@ -51,3 +56,8 @@ def reproject_tif():
                     dst_transform=transform,
                     dst_crs=dst_crs,
                     resampling=Resampling.cubic_spline)
+
+
+def reproject_tif():
+    args = parse_args()
+    reproject_tif_main(args.epsg, args.input, args.output)
