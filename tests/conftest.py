@@ -65,3 +65,10 @@ def synthetic_raster(tmp_path_factory):
     build_synthetic_raster(fn)
 
     return fn
+
+
+@pytest.fixture(scope="function")
+def reproject_raster(tmp_path_factory):
+    fn = tmp_path_factory.mktemp("data") / "synthetic_reproject.tif"
+
+    return fn
