@@ -17,7 +17,7 @@ optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
 sunset-view-tif = "brisbane_sunset:view_tif"
 sunset-subset-tif = "brisbane_sunset:subset_tif"
 sunset-reproject-tif = "brisbane_sunset:reproject_tif"
-sunset-run = "brisbane_sunset:run_combined_script"
+sunset-run = "brisbane_sunset:run_combined"
 
 [tool.pytest.ini_options]
 addopts = [

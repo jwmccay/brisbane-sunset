@@ -55,8 +55,8 @@ def parse_args():
     return args
 
 
-def run_combined(date_str, origin_coordinate, raster_fname, coord_mode,
-                 draw_plots, figure_directory):
+def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
+                      draw_plots, figure_directory):
 
     date = parse_date(date_str)
     lat_origin, lon_origin = parse_coordinate(origin_coordinate)
@@ -101,10 +101,11 @@ def run_combined(date_str, origin_coordinate, raster_fname, coord_mode,
     return dt
 
 
-def run_combined_script():
+def run_combined():
     args = parse_args()
-    dt = run_combined(args.date, args.origin_coordinate, args.raster,
-                      args.coord_mode, args.draw_plots, args.figure_directory)
+    dt = run_combined_main(args.date, args.origin_coordinate, args.raster,
+                           args.coord_mode, args.draw_plots,
+                           args.figure_directory)
 
     hour = dt.hour - 12
     minute = str(dt.minute).rjust(2, "0")
