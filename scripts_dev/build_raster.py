@@ -14,10 +14,12 @@ import numpy as np
 import rasterio
 from rasterio.transform import Affine
 
-deg_lon = -122.0
-deg_lat = 38.0
-delta_lon = 1.0
-delta_lat = 1.0
+# -d "2025-1-18" -oc "37.78,-122.403"
+
+deg_lon = -122.4
+deg_lat = 37.8
+delta_lon = 0.05
+delta_lat = 0.08
 n_lat = 120
 n_lon = 90
 
@@ -37,7 +39,7 @@ Z1 = np.exp(-2 * np.log(2)
             * ((X_temp - 0.5) ** 2 + (Y_temp - 0.5) ** 2) / 1 ** 2)
 Z2 = np.exp(-3 * np.log(2)
             * ((X_temp + 0.5) ** 2 + (Y_temp + 0.5) ** 2) / 2.5 ** 2)
-Z = 10.0 * (Z2 - Z1)
+Z = 300.0 * (Z2 - Z1)
 
 res = (x[-1] - x[0]) / n_lat
 transform = Affine.translation(
