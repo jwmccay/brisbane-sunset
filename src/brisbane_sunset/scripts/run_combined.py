@@ -71,12 +71,9 @@ def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
     # Options that have not migrated to argparse yet
     distance = 1800.0
     num_points = 10000
-    # interp_mode = "RegularGrid"
-    interp_mode = "LinearND"
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
-        interp_mode,
         epsg_latlon)
 
     if coord_mode == "xy":
@@ -93,7 +90,6 @@ def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
 
     dt = time_blocked(origin, distance, date, interp, rd,
                       draw_plots=draw_plots,
-                      interp_mode=interp_mode,
                       coord_mode=coord_mode,
                       num_points=num_points,
                       fig_dir=figure_directory)

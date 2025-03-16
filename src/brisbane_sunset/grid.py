@@ -3,8 +3,7 @@ Functions for handling terrain grids
 """
 
 import numpy as np
-from scipy.interpolate import (LinearNDInterpolator,
-                               RegularGridInterpolator)
+from scipy.interpolate import LinearNDInterpolator
 import rasterio
 from pyproj import Transformer
 
@@ -57,17 +56,9 @@ class RasterData:
         return points, point_values
 
 
-def setup_interpolator(rd: RasterData, interp_mode="RegularGrid"):
+def setup_interpolator(rd: RasterData):
 
-    if interp_mode == "LinearND":
-        interp = LinearNDInterpolator(rd.points, rd.point_values)
-    elif interp_mode == "RegularGrid":
-        interp = RegularGridInterpolator(
-            (rd.lons_grid[0, :], rd.lats_grid[:, 0]),
-            np.transpose(rd.values_grid)
-        )
-    else:
-        raise ValueError("Invalid interpolation type.")
+    interp = LinearNDInterpolator(rd.points, rd.point_values)
 
     return interp
 
