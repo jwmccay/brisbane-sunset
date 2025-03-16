@@ -38,7 +38,7 @@ def parse_coordinate(coord_string: str):
     return coord_list
 
 
-def run_combined():
+def parse_args():
 
     parser = argparse.ArgumentParser(
                         prog='sunset-run-combined',
@@ -48,17 +48,21 @@ def run_combined():
     parser.add_argument("-d", "--date")
     parser.add_argument("-oc", "--origin_coordinate")
     parser.add_argument("-cm", "--coord_mode")
+    parser.add_argument("-vl", "--vector_length")
+    parser.add_argument("-ni", "--num_interps")
     parser.add_argument("-dp", "--draw_plots", action='store_true')
     parser.add_argument("-fd", "--figure_directory", default=None)
-
     args = parser.parse_args()
 
-    date = parse_date(args.date)
-    lat_origin, lon_origin = parse_coordinate(args.origin_coordinate)
-    raster_fname = args.raster
-    coord_mode = args.coord_mode
-    draw_plots = args.draw_plots
-    figure_directory = args.figure_directory
+    return args
+
+
+def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
+                      vector_length, num_interps,
+                      draw_plots, figure_directory):
+
+    date = parse_date(date_str)
+    lat_origin, lon_origin = parse_coordinate(origin_coordinate)
 
     if coord_mode == "xy":
         epsg_latlon = 4326
@@ -67,15 +71,11 @@ def run_combined():
     else:
         assert False, f"coord_mode {coord_mode} is not a valid coordinate mode"
 
-    # Options that have not migrated to argparse yet
-    distance = 1800.0
-    num_points = 10000
-    # interp_mode = "RegularGrid"
-    interp_mode = "LinearND"
+    distance = vector_length
+    num_points = num_interps
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
-        interp_mode,
         epsg_latlon)
 
     if coord_mode == "xy":
@@ -92,10 +92,19 @@ def run_combined():
 
     dt = time_blocked(origin, distance, date, interp, rd,
                       draw_plots=draw_plots,
-                      interp_mode=interp_mode,
                       coord_mode=coord_mode,
                       num_points=num_points,
                       fig_dir=figure_directory)
+
+    return dt
+
+
+def run_combined():
+    args = parse_args()
+    dt = run_combined_main(args.date, args.origin_coordinate, args.raster,
+                           args.coord_mode,
+                           float(args.vector_length), int(args.num_interps),
+                           args.draw_plots, args.figure_directory)
 
     hour = dt.hour - 12
     minute = str(dt.minute).rjust(2, "0")

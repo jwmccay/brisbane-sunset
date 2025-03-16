@@ -17,11 +17,10 @@ from brisbane_sunset.grid import (RasterData,
 
 
 def standard_preparation(raster_fname,
-                         interp_mode,
                          epsg_latlon=None):
 
     rd = RasterData(raster_fname)
-    interp = setup_interpolator(rd, interp_mode=interp_mode)
+    interp = setup_interpolator(rd)
 
     if epsg_latlon is not None:
         transformer = setup_transformer(epsg_latlon, rd.crs.to_epsg())
@@ -31,16 +30,12 @@ def standard_preparation(raster_fname,
     return rd, interp, transformer
 
 
-def interp_wrapper(interp, lon_list, lat_list, interp_mode="RegularGrid"):
-    if interp_mode == "LinearND":
-        return interp(lon_list, lat_list)
-    elif interp_mode == "RegularGrid":
-        return interp((lon_list, lat_list))
+def interp_wrapper(interp, lon_list, lat_list):
+    return interp(lon_list, lat_list)
 
 
 def time_blocked(origin, max_distance, date, interp, rd,
                  draw_plots=False,
-                 interp_mode="RegularGrid",
                  coord_mode="latlon",
                  num_points=100,
                  fig_dir=None):
@@ -51,16 +46,13 @@ def time_blocked(origin, max_distance, date, interp, rd,
     origin : containers.Origin
         Location of observer
     max_distance : float
-        Distance to check for interpolation (padded by 50%)
+        Distance to check for interpolation
     date : containers.Date
         Day for calculation
     rd : grid.RasterData
         Raster for use in plotting
     draw_plots : bool
         Whether to draw plots
-    interp_mode : str
-        Interpolation algorithmm, either `RegularGrid` or `LinearND`.
-        Removal of `RegularGrid` is planned.
     coord_mode : str
         Mode for calculating coordinates. Either `xy` or `latlon`. Note
         that `xy` is faster.
@@ -77,7 +69,7 @@ def time_blocked(origin, max_distance, date, interp, rd,
         Sunset time in local timezone
     """
 
-    distance_list = np.linspace(1.0, max_distance * 1.5,
+    distance_list = np.linspace(1.0, max_distance,
                                 num=num_points)
 
     dt, dt_utc = input_to_datetime(date.year, date.month, date.day,
@@ -118,8 +110,7 @@ def time_blocked(origin, max_distance, date, interp, rd,
         else:
             raise ValueError("Invalid coordinate mode.")
 
-        interp_range = interp_wrapper(interp, lon_list, lat_list,
-                                      interp_mode=interp_mode)
+        interp_range = interp_wrapper(interp, lon_list, lat_list)
 
         phi_range = phi_critical(np.array(distance_list),
                                  np.array(interp_range),
