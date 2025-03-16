@@ -23,6 +23,7 @@ echo "Expect approx: \"Sunset at 4:09 on 1/18/2025\""
 sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
     -r "data_test/n37_w123_subset_reproject.tif" \
     -cm "xy" \
+    -vl 2700 -ni 100 -cm "xy" \
     -dp -fd "data_test/figs"
 
 rm -r data_test
