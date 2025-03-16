@@ -27,11 +27,13 @@ if __name__ == "__main__":
     coord_mode = "xy"
     epsg_latlon = 4326
 
-    sample_bounds_low = (37.67386, -122.43312)
-    sample_bounds_high = (37.69962, -122.37918)
+    # # Large region
+    # sample_bounds_low = (37.67386, -122.43312)
+    # sample_bounds_high = (37.69962, -122.37918)
 
-    # sample_bounds_low = (37.676, -122.410)
-    # sample_bounds_high = (37.686, -122.394)
+    # Small region
+    sample_bounds_low = (37.676, -122.410)
+    sample_bounds_high = (37.686, -122.394)
 
     print("prep")
 
