@@ -14,3 +14,6 @@ Initial release.
 - Add integration tests with synthetic data
 - Remove redundant interpolation option
 - Make interpolation vector dimensions user-specified
+
+## v0.3.1
+- Tagged the wrong commit for v0.3.0
