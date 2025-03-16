@@ -20,9 +20,6 @@ if __name__ == "__main__":
 
     draw_plots = True
 
-    # interp_mode = "RegularGrid"
-    interp_mode = "LinearND"
-
     # coord_mode = "latlon"
     # raster_fname = "data/n37_w123_subset.tif"
     # epsg_latlon = None
@@ -35,7 +32,6 @@ if __name__ == "__main__":
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
-        interp_mode,
         epsg_latlon)
 
     if coord_mode == "xy":
@@ -62,7 +58,6 @@ if __name__ == "__main__":
         date = Date(day.year, day.month, day.day)
         dt_day = time_blocked(origin, distance, date, interp, rd,
                               draw_plots=False,
-                              interp_mode=interp_mode,
                               coord_mode=coord_mode,
                               num_points=1000)
 

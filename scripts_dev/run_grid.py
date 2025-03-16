@@ -23,9 +23,6 @@ if __name__ == "__main__":
 
     draw_plots = True
 
-    # interp_mode = "RegularGrid"
-    interp_mode = "LinearND"
-
     raster_fname = "data/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
@@ -40,7 +37,6 @@ if __name__ == "__main__":
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
-        interp_mode,
         epsg_latlon)
 
     plt.pcolormesh(rd.lons_grid, rd.lats_grid, rd.values_grid)
@@ -97,7 +93,6 @@ if __name__ == "__main__":
 
             dt_orig = time_blocked(origin, distance, date, interp, rd,
                                    draw_plots=False,
-                                   interp_mode=interp_mode,
                                    coord_mode=coord_mode)
 
             if n % 100 == 0:
