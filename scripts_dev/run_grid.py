@@ -19,28 +19,26 @@ if __name__ == "__main__":
     month = 11
     day = 10
 
-    distance = 1800.0
+    distance = 2700.0
 
     draw_plots = True
-
-    # interp_mode = "RegularGrid"
-    interp_mode = "LinearND"
 
     raster_fname = "data/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
 
-    sample_bounds_low = (37.67386, -122.43312)
-    sample_bounds_high = (37.69962, -122.37918)
+    # # Large region
+    # sample_bounds_low = (37.67386, -122.43312)
+    # sample_bounds_high = (37.69962, -122.37918)
 
-    # sample_bounds_low = (37.676, -122.410)
-    # sample_bounds_high = (37.686, -122.394)
+    # Small region
+    sample_bounds_low = (37.676, -122.410)
+    sample_bounds_high = (37.686, -122.394)
 
     print("prep")
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
-        interp_mode,
         epsg_latlon)
 
     plt.pcolormesh(rd.lons_grid, rd.lats_grid, rd.values_grid)
@@ -97,7 +95,6 @@ if __name__ == "__main__":
 
             dt_orig = time_blocked(origin, distance, date, interp, rd,
                                    draw_plots=False,
-                                   interp_mode=interp_mode,
                                    coord_mode=coord_mode)
 
             if n % 100 == 0:

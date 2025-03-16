@@ -45,19 +45,25 @@ sunset-reproject-tif \
 
 ### Step 3: Compute sunset times
 
-The `sunset-run` utility takes a date, origin (or viewer) coordinate, and raster and then computes an approximate time for a local sunset accounting for terrain shading. Note that you need specify usage of either an x/y or a lat/lon coordinate for interpolation (`-cm "xy"` or `-cm "latlon`). The input raster must match the coordinate mode (i.e., you will probably not be able to the x/y mode if you have not run `sunset-reproject-tif`) and x/y coordinates are assumed to be in meters:
+The `sunset-run` utility takes a date, origin (or viewer) coordinate, and raster and then computes an approximate time for a local sunset accounting for terrain shading.
 
 ```shell
 sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
     -r "data/n37_w123_subset_reproject.tif" \
+    -vl 2700 -ni 200 -cm "xy" \
     -cm "xy"
 ```
+
+Note that, for now, you need specify the following additional options (which will hopefully be determined automatically in future versions):
+- Usage of either an x/y or a lat/lon coordinate for interpolation (`-cm "xy"` or `-cm "latlon`). The input raster must match the coordinate mode (i.e., you will probably not be able to the x/y mode if you have not run `sunset-reproject-tif`) and x/y coordinates are assumed to be in meters:
+- Length of a vector to check along in meters (`-vl`) and number of points to check for intersection along that vector (`-ni`). For accurate results, `-vl` should be greater than the distance between the origin and the prominent terrain of interest, and `-ni` should result in point separation similar to the grid resolution.
 
 The lat/lon alternative is:
 
 ```shell
 sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
     -r "data/n37_w123_subset.tif" \
+    -vl 2700 -ni 200 -cm "xy" \
     -cm "latlon"
 ```
 
@@ -66,7 +72,7 @@ Some additional arguments allow for the output of plots useful for debugging (`-
 ```shell
 sunset-run -d "2025-1-18" -oc "37.6924344,-122.4150331" \
     -r "data/n37_w123_subset_reproject.tif" \
-    -cm "xy" \
+    -cm "xy" -vl 2700 -ni 200 -cm "xy" \
     -dp -fd "figs"
 ```
 
