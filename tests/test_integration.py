@@ -41,6 +41,24 @@ def test_run_combined_xy(synthetic_raster, reproject_raster,
     assert abs(dt.minute - 8) < 3
 
 
+def test_run_combined_xy_oob(synthetic_raster, reproject_raster,
+                             winter_date, synth_origin):
+    """Test that the value is the same even for a very long vector
+    that goes out of bounds.
+    """
+
+    reproject_tif_main("7131", synthetic_raster, reproject_raster)
+    dt = run_combined_main(winter_date, synth_origin,
+                           reproject_raster, "xy", 27000.0, 2000,
+                           False, None)
+
+    # To avoid making tests unstable, check that the hour is right and
+    # minutes are within three of the test. Note that the current test
+    # is showing 4:18 on 2025-01-18.
+    assert dt.hour == 16
+    assert abs(dt.minute - 8) < 3
+
+
 def test_run_combined_latlon(synthetic_raster, reproject_raster,
                              winter_date, synth_origin):
 

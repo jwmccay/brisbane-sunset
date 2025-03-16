@@ -58,7 +58,8 @@ class RasterData:
 
 def setup_interpolator(rd: RasterData):
 
-    interp = LinearNDInterpolator(rd.points, rd.point_values)
+    interp = LinearNDInterpolator(rd.points, rd.point_values,
+                                  fill_value=rd.point_values.min())
 
     return interp
 
