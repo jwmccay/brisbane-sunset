@@ -8,3 +8,9 @@ Initial release.
 - Remove need for user to specify a CRS in some cases
 - Document usage
 - Improvements to plotting and printouts
+
+## v0.3.0
+- Add some misc. tests and docstrings
+- Add integration tests with synthetic data
+- Remove redundant interpolation option
+- Make interpolation vector dimensions user-specified
