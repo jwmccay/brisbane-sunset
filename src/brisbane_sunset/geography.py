@@ -8,6 +8,26 @@ from geopy.distance import geodesic, great_circle
 
 
 def card_to_cart(radius: np.ndarray, phi: float):
+    """Find an xy coordinate given a radius and a cardinal direction
+
+    Radius can be an array to support typical ussage in this project,
+    giving a number of points along a vector. The direction must be
+    cardinal degrees (0 is up, 90 is right).
+
+    Parameters
+    ----------
+    radius: np.array or float
+        Array or single value of radii
+    phi : float
+        Direction in cardinal degrees
+
+    Returns
+    -------
+    x : np.array or float
+        Array or single value of x coordinates
+    y : np.array or float
+        Array or single value of y coordinates
+    """
 
     # convert from cardinal polar to math polar
     phi_polar = phi - 90.

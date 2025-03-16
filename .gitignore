@@ -11,7 +11,7 @@ dist/
 .DS_Store
 
 # Data
-data/
+*.tif
 *.bsp
 *.png
 scripts/*.csv
