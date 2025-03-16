@@ -16,7 +16,7 @@ if __name__ == "__main__":
     lon_origin = -122.4150331485603
     lat_origin = 37.692434406915844
 
-    distance = 1800.0
+    distance = 2700.0
 
     draw_plots = True
 

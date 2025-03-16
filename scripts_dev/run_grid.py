@@ -19,7 +19,7 @@ if __name__ == "__main__":
     month = 11
     day = 10
 
-    distance = 1800.0
+    distance = 2700.0
 
     draw_plots = True
 
