@@ -46,7 +46,7 @@ def time_blocked(origin, max_distance, date, interp, rd,
     origin : containers.Origin
         Location of observer
     max_distance : float
-        Distance to check for interpolation (padded by 50%)
+        Distance to check for interpolation
     date : containers.Date
         Day for calculation
     rd : grid.RasterData
@@ -69,7 +69,7 @@ def time_blocked(origin, max_distance, date, interp, rd,
         Sunset time in local timezone
     """
 
-    distance_list = np.linspace(1.0, max_distance * 1.5,
+    distance_list = np.linspace(1.0, max_distance,
                                 num=num_points)
 
     dt, dt_utc = input_to_datetime(date.year, date.month, date.day,

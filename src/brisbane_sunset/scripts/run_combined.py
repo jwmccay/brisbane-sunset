@@ -48,6 +48,8 @@ def parse_args():
     parser.add_argument("-d", "--date")
     parser.add_argument("-oc", "--origin_coordinate")
     parser.add_argument("-cm", "--coord_mode")
+    parser.add_argument("-vl", "--vector_length")
+    parser.add_argument("-ni", "--num_interps")
     parser.add_argument("-dp", "--draw_plots", action='store_true')
     parser.add_argument("-fd", "--figure_directory", default=None)
     args = parser.parse_args()
@@ -56,6 +58,7 @@ def parse_args():
 
 
 def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
+                      vector_length, num_interps,
                       draw_plots, figure_directory):
 
     date = parse_date(date_str)
@@ -68,9 +71,8 @@ def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
     else:
         assert False, f"coord_mode {coord_mode} is not a valid coordinate mode"
 
-    # Options that have not migrated to argparse yet
-    distance = 1800.0
-    num_points = 10000
+    distance = vector_length
+    num_points = num_interps
 
     rd, interp, transformer = standard_preparation(
         raster_fname,
@@ -100,8 +102,9 @@ def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
 def run_combined():
     args = parse_args()
     dt = run_combined_main(args.date, args.origin_coordinate, args.raster,
-                           args.coord_mode, args.draw_plots,
-                           args.figure_directory)
+                           args.coord_mode,
+                           float(args.vector_length), int(args.num_interps),
+                           args.draw_plots, args.figure_directory)
 
     hour = dt.hour - 12
     minute = str(dt.minute).rjust(2, "0")
