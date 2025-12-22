@@ -1,8 +1,9 @@
 """
-Combined calc
+Combined calc over a year
 """
 
 import argparse
+import datetime
 
 from brisbane_sunset.containers import Origin, Date
 from brisbane_sunset.dusk import (standard_preparation,
@@ -45,7 +46,7 @@ def parse_args():
                         description='Reproject an SRTM tif')
 
     parser.add_argument("-r", "--raster")
-    parser.add_argument("-d", "--date")
+    parser.add_argument("-y", "--year")
     parser.add_argument("-oc", "--origin_coordinate")
     parser.add_argument("-cm", "--coord_mode")
     parser.add_argument("-vl", "--vector_length")
@@ -57,11 +58,10 @@ def parse_args():
     return args
 
 
-def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
+def run_combined_main(year_str, origin_coordinate, raster_fname, coord_mode,
                       vector_length, num_interps,
                       draw_plots, figure_directory):
 
-    date = parse_date(date_str)
     lat_origin, lon_origin = parse_coordinate(origin_coordinate)
 
     if coord_mode == "xy":
@@ -90,23 +90,35 @@ def run_combined_main(date_str, origin_coordinate, raster_fname, coord_mode,
                         interp, x_origin, y_origin))
     origin.init_xy(x_origin, y_origin)
 
-    dt = time_blocked(origin, distance, date, interp, rd,
-                      draw_plots=draw_plots,
-                      coord_mode=coord_mode,
-                      num_points=num_points,
-                      fig_dir=figure_directory)
+    base = datetime.datetime(int(year_str), 1, 1, 1, 1)
+    day_list = [base + datetime.timedelta(days=x) for x in range(365)]
 
-    return dt
+    dt_list = []
+    hour_list = []
 
+    for day in day_list:
+        date = Date(day.year, day.month, day.day)
 
+        dt = time_blocked(origin, distance, date, interp, rd,
+                          draw_plots=draw_plots,
+                          coord_mode=coord_mode,
+                          num_points=num_points,
+                          fig_dir=figure_directory)
+
+        dt_list.append(dt)
+        hour_list.append(dt.day - 12 + dt_day.minute / 60)
+
+    print(hour_list)
+
+    
 def run_combined():
     args = parse_args()
-    dt = run_combined_main(args.date, args.origin_coordinate, args.raster,
+    dt = run_combined_main(args.year, args.origin_coordinate, args.raster,
                            args.coord_mode,
                            float(args.vector_length), int(args.num_interps),
                            args.draw_plots, args.figure_directory)
 
-    hour = dt.hour - 12
-    minute = str(dt.minute).rjust(2, "0")
+    # hour = dt.hour - 12
+    # minute = str(dt.minute).rjust(2, "0")
 
-    print(f"Sunset at {hour}:{minute} on {dt.month}/{dt.day}/{dt.year}")
+    # print(f"Sunset at {hour}:{minute} on {dt.month}/{dt.day}/{dt.year}")
