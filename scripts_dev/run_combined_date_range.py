@@ -13,8 +13,17 @@ from brisbane_sunset.dusk import (standard_preparation,
 
 if __name__ == "__main__":
 
+    loc_name = "Mission Blue"
     lon_origin = -122.4150331485603
     lat_origin = 37.692434406915844
+
+    loc_name = "Library"
+    lon_origin = -122.4028692
+    lat_origin = 37.6832913
+
+    loc_name = "Home" # Anonymized
+    lon_origin = 0
+    lat_origin = 0
 
     distance = 2700.0
 
@@ -54,7 +63,7 @@ if __name__ == "__main__":
 
     i = 0
 
-    str_list = []
+    str_list = [f",{loc_name}\n"]
 
     for day in day_list:
         date = Date(day.year, day.month, day.day)
@@ -67,14 +76,17 @@ if __name__ == "__main__":
 
         hour_list.append(dt_day.hour - 12 + dt_day.minute / 60)
 
+        hour = dt_day.hour - 12
+        minute = str(dt_day.minute).rjust(2, "0")
+
         # print(i, hour_list[-1], dt_day.hour - 12, dt_day.minute)
-        print(f"{dt_day.month} {dt_day.day} {dt_day.hour - 12}:{dt_day.minute}")
+        print(f"{dt_day.month} {dt_day.day} {hour}:{minute}")
         i += 1
 
-        storage_str = f"{day.year}-{dt_day.month}-{dt_day.day},{dt_day.hour - 12}:{dt_day.minute}\n"
+        storage_str = f"{day.year}-{dt_day.month}-{dt_day.day},{hour}:{minute}\n"
         str_list.append(storage_str)
 
-    f_out = "test.csv"
+    f_out = f"{loc_name}.csv"
     with open(f_out, "w") as f:
         f.writelines(str_list)
 
