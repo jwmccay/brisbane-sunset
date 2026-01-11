@@ -13,8 +13,17 @@ from brisbane_sunset.dusk import (standard_preparation,
 
 if __name__ == "__main__":
 
+    loc_name = "Mission Blue"
     lon_origin = -122.4150331485603
     lat_origin = 37.692434406915844
+
+    loc_name = "Library"
+    lon_origin = -122.4028692
+    lat_origin = 37.6832913
+
+    loc_name = "Home" # Anonymized
+    lon_origin = 0
+    lat_origin = 0
 
     distance = 2700.0
 
@@ -24,7 +33,7 @@ if __name__ == "__main__":
     # raster_fname = "data/n37_w123_subset.tif"
     # epsg_latlon = None
 
-    raster_fname = "data/n37_w123_subset_reproject.tif"
+    raster_fname = "./data_test/n37_w123_subset_reproject.tif"
     coord_mode = "xy"
     epsg_latlon = 4326
 
@@ -54,6 +63,8 @@ if __name__ == "__main__":
 
     i = 0
 
+    str_list = [f",{loc_name}\n"]
+
     for day in day_list:
         date = Date(day.year, day.month, day.day)
         dt_day = time_blocked(origin, distance, date, interp, rd,
@@ -65,13 +76,24 @@ if __name__ == "__main__":
 
         hour_list.append(dt_day.hour - 12 + dt_day.minute / 60)
 
-        print(i, hour_list[-1])
+        hour = dt_day.hour - 12
+        minute = str(dt_day.minute).rjust(2, "0")
+
+        # print(i, hour_list[-1], dt_day.hour - 12, dt_day.minute)
+        print(f"{dt_day.month} {dt_day.day} {hour}:{minute}")
         i += 1
+
+        storage_str = f"{day.year}-{dt_day.month}-{dt_day.day},{hour}:{minute}\n"
+        str_list.append(storage_str)
+
+    f_out = f"{loc_name}.csv"
+    with open(f_out, "w") as f:
+        f.writelines(str_list)
 
     if draw_plots:
         plt.plot(day_list, hour_list)
         plt.grid()
         plt.xlabel("Date")
         plt.ylabel("Sunset time [hour since noon]")
-        plt.savefig("figs/date_range_dusk.png")
+        plt.savefig("data_test/figs/date_range_dusk.png")
         plt.close()
